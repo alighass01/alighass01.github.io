@@ -5,8 +5,8 @@
         <script>
         function checkAnswers(){
             // The following is what I changed.
-            Student_answer = document.querySelector('[name="clave1"]').value
-            Teacher_answer = "Westfield"
+            Student_answer = document.querySelector('[name="username"]').value
+            Teacher_answer = "Yes"
 
             if (Student_answer.length === 0 || Teacher_answer.length === 0) {
                 alert("You must enter an answer to continue...");
@@ -38,6 +38,9 @@
             font-size: 1.875em;
         }
 
+        h3 {
+            font-size: 1em
+        }
         p {
             font-size: 0.875em;
         }
@@ -46,12 +49,13 @@
     
         <h1>Congrats!</h1>
         <br>
-        <h1>You made it to the right place.</h1>
+        <h2>You made it to the right place.</h2>
         
         <h3>The following is a series of riddles. Too easy, I would say - nothing more than a Monday NYT Crossword for you.</h3>
 
+        <h3>If your in for it, type "Yes" into the field below and click "Check".</h3>
         <form action="" name="f1" onsubmit >
-        Your answer: <input type="password" name="clave1" size="20">
+        Your answer: <input type="username" name="username" size="20">
         <br>
         <font size="2">Answers are case sensitive</font><br/>
         <br>
