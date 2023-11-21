@@ -6,16 +6,16 @@
         function checkAnswers(){
             // The following is what I changed.
             Student_answer = document.querySelector('[name="username"]').value
-            Teacher_answer = "TOP"
+            Teacher_answer = "shipping pallets"
 
             if (Student_answer.length === 0 || Teacher_answer.length === 0) {
-                alert("Where's the answer babes...like?");
+                alert("No amswer?");
                 return false;
             }
 
             if (Student_answer === Teacher_answer) {
-                alert("Bingo-was-his-namo!");
-                document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io/third_question.html\';">Next Riddle</button>'
+                alert("Yasssss. I wonder what's next?");
+                document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io./codepage.html\';">Next Riddle</button>'
                 //NOTE: here is where the button should be activated and click on it to advance to an hyperlink 
             } else {
                 alert("*loud buzzer noise* WRONG! Try again :)");
@@ -49,11 +49,7 @@
     
         <h2>Question 2</h2>
         
-        <h3>A night out on the town<br>
-            Firebll in the streets<br>
-            We danced our night at Metro<br>
-            What were we stamped?
-        </h3>
+        <h3> What piece of shipping equipment did I use to attempt to break the fall of a 400ish lbs. Birthmas gift onto your front yard?</h3>
 
         <form action="" name="f1" onsubmit >
         Your answer: <input type="username" name="username" size="20">
