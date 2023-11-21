@@ -6,7 +6,7 @@
         function checkAnswers(){
             // The following is what I changed.
             Student_answer = document.querySelector('[name="username"]').value
-            Teacher_answer = "Westfield"
+            Teacher_answer = "AP United States History"
 
             if (Student_answer.length === 0 || Teacher_answer.length === 0) {
                 alert("Where's the answer babes...like?");
@@ -14,8 +14,8 @@
             }
 
             if (Student_answer === Teacher_answer) {
-                alert("Correct! Onwards...");
-                document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io.html/second_question.html\';">Next Riddle</button>'
+                alert("Again :)");
+                document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io.html/sixth_question.html\';">Next Riddle</button>'
                 //NOTE: here is where the button should be activated and click on it to advance to an hyperlink 
             } else {
                 alert("*loud buzzer noise* WRONG! Try again :)");
@@ -47,9 +47,11 @@
     </style>
     <body style='font-family: helvetica;'>
     
-        <h2>Question 1</h2>
+        <h2>Question 2</h2>
         
-        <h3>Location of our first date, formally.</h3>
+        <h3>What class would we show up to late following an almost
+            daily skippage of NEST?
+        </h3>
 
         <form action="" name="f1" onsubmit >
         Your answer: <input type="username" name="username" size="20">
