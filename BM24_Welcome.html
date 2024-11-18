@@ -6,19 +6,19 @@
         function checkAnswers(){
             // The following is what I changed.
             Student_answer = document.querySelector('[name="username"]').value
-            Teacher_answer = "Whole Foods Market"
+            Teacher_answer = "Y"
 
             if (Student_answer.length === 0 || Teacher_answer.length === 0) {
-                alert("No answer? That just won't work :(");
+                alert("No answer? Already off to a great start :(");
                 return false;
             }
 
             if (Student_answer === Teacher_answer) {
-                alert("Bamn!!! Now play the flute...");
+                alert("Whooptie Woop...let the games begin!");
                 document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io/sixth_question.html\';">Next Riddle</button>'
                 //NOTE: here is where the button should be activated and click on it to advance to an hyperlink 
             } else {
-                alert("*loud buzzer noise* WRONG! Try again :)");
+                alert("I = sad...why not?");
                 //NOTE: here the button must be disabled
             }
 
@@ -59,12 +59,14 @@
             Welcome to Birthmas 2024! We are so happy to see you back.
         </h2>
         
-        <h3>Where are you going?</h3>
+        <h3>
+            Are you ready to play kids? (Y/N)
+        </h3>
 
         <form action="" name="f1" onsubmit >
         Your answer: <input type="username" name="username" size="20">
         <br>
-        <font size="2">Answers are case sensitive (3 Words, Official Name)</font><br/>
+        <font size="2">Answers are case sensitive</font><br/>
         <br>
         <input type="button" value="Check" onClick="checkAnswers()">
 
