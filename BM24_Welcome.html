@@ -6,7 +6,7 @@
         function checkAnswers(){
             // The following is what I changed.
             Student_answer = document.querySelector('[name="username"]').value
-            Teacher_answer = "Y"
+            Teacher_answer = "Yes Ali! I am ready."
 
             if (Student_answer.length === 0 || Teacher_answer.length === 0) {
                 alert("No answer? Already off to a great start :(");
@@ -133,10 +133,15 @@
             Are you ready to play kids? (Y/N)
         </h3>
 
+        <p>
+            If yes, enter: Yes Ali! I am ready. <br>
+            If no, enter: No Ali! I am poopie butt.
+        </p>
+
         <form action="" name="f1" onsubmit >
         Your answer: <input type="username" name="username" size="20">
         <br>
-        <font size="2">Answers are case sensitive</font><br/>
+        <font size="2">Answers are case/character sensitive</font><br/>
         <br>
         <input type="button" value="Check" onClick="checkAnswers()">
         </form>
