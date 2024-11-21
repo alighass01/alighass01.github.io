@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+    </head>
+  
+    <style>
+        body {
+            font-size: 100%;
+        }
 
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 1.875em;
+        }
+
+        h3 {
+            font-size: 1em
+        }
+        p {
+            font-size: 0.875em;
+        }
+    </style>
+    <body style='font-family: helvetica;'>
+
+        function startGame() {
+          myGamePiece = new component(30, 30, "red", 10, 120);
+          myGamePiece.gravity = 0.05;
+          myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+          myGameArea.start();
+        }
+
+        var myGameArea = {
+          canvas : document.createElement("canvas"),
+          start : function() {
+            this.canvas.width = 480;
+            this.canvas.height = 270;
+            this.context = this.canvas.getContext("2d");
+            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+            this.frameNo = 0;
+          },
+          clear : function() {
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          }
+        }
+
+        <form action="https://alighass01.github.io/BM24_Welcome.html">
+        <input type="submit" value="Welcome Page // Home" />
+        </form>
+
+        <br>
+        
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGFveWFvc3NrYTU3Z2JyY2lxdDYxOGNvZXpxZHYwNnpudzJocmtoeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/s980CyPBemXkGfLZZd/giphy.webp" alt="Boston cop slide gif">
+        
+        <h1>
+            QUESTION SET 1
+        </h1>
+
+        <h2>
+            Ya ready? <br>
+            To begin, select button below.
+        </h2>
+
+        <form action="https://alighass01.github.io/BM24_Set1o4_Q1.html">
+        <input type="submit" value="Begin Set 1" />
+        </form>
+      
+        <br><br>
+        
+
+
+    </body>
+</html>
