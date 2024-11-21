@@ -1,99 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-    <title></title>
-    <script>
-    function startGame() {
-      myGamePiece = new component(30, 30, "red", 10, 120);
-      myGamePiece.gravity = 0.05;
-      myScore = new component("30px", "Consolas", "black", 280, 40, "text");
-      myGameArea.start();
-    }
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
 
-    var myGameArea = {
-      canvas : document.createElement("canvas"),
-      start : function() {
+#visitButton {
+    display: none; /* Initially hidden */
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+</style>
+</head>
+<body onload="startGame()">
+<script>
+
+var myGamePiece;
+var myObstacles = [];
+var myScore;
+var gameOver = false;
+
+function startGame() {
+    myGamePiece = new component(30, 30, "red", 10, 120);
+    myGamePiece.gravity = 0.05;
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myGameArea.start();
+    document.getElementById('visitButton').style.display = 'none'; // Hide the button initially
+}
+
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
         this.canvas.width = 480;
         this.canvas.height = 270;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
-      },
-      clear : function() {
+        this.interval = setInterval(updateGameArea, 20);
+    },
+    clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      }
     }
+}
 
-        
-    function checkAnswers(){
-        // The following is what I changed.
-        Student_answer = document.querySelector('[name="username"]').value
-        Teacher_answer = "Spring Shabu Shabu"
-
-        if (Student_answer.length === 0 || Teacher_answer.length === 0) {
-            alert("Take a guess pleaseeeeeee");
-            return false;
-        }
-
-        if (Student_answer === Teacher_answer) {
-            alert("Swish swish bish - Katy Perry");
-            document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io/BM24_Set1o4_Q2.html\';">Next Riddle</button>'
-            //NOTE: here is where the button should be activated and click on it to advance to an hyperlink 
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.score = 0;
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;
+    this.gravity = 0;
+    this.gravitySpeed = 0;
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
         } else {
-            alert("Erm, no :(");
-            //NOTE: here the button must be disabled
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
         }
-
     }
-    </script>
-    </head>
-  
-    <style>
-        body {
-            font-size: 100%;
+    this.newPos = function() {
+        this.gravitySpeed += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY + this.gravitySpeed;
+        this.hitBottom();
+    }
+    this.hitBottom = function() {
+        var rockbottom = myGameArea.canvas.height - this.height;
+        if (this.y > rockbottom) {
+            this.y = rockbottom;
+            this.gravitySpeed = 0;
+            gameOver = true;
+            checkScore();
         }
-
-        h1 {
-            font-size: 2.5em;
+    }
+    this.crashWith = function(otherobj) {
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
         }
+        return crash;
+    }
+}
 
-        h2 {
-            font-size: 1.875em;
-        }
+function updateGameArea() {
+    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            gameOver = true;
+            checkScore(); // Check the score if the player crashes
+            return;
+        } 
+    }
+    if (gameOver) return;
 
-        h3 {
-            font-size: 1em
-        }
-        p {
-            font-size: 0.875em;
-        }
-    </style>
-    <body style='font-family: helvetica;'>
+    myGameArea.clear();
+    myGameArea.frameNo += 1;
+    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+        x = myGameArea.canvas.width;
+        minHeight = 20;
+        maxHeight = 200;
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        minGap = 50;
+        maxGap = 200;
+        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        myObstacles.push(new component(10, height, "green", x, 0));
+        myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+    }
+    for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].x += -1;
+        myObstacles[i].update();
+    }
+    myScore.text="SCORE: " + myGameArea.frameNo;
+    myScore.update();
+    myGamePiece.newPos();
+    myGamePiece.update();
+}
 
-        <form action="https://alighass01.github.io/BM24_Welcome.html">
-        <input type="submit" value="Welcome Page // Home" />
-        </form>
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
 
-        <br>
-        
-        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGFveWFvc3NrYTU3Z2JyY2lxdDYxOGNvZXpxZHYwNnpudzJocmtoeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/s980CyPBemXkGfLZZd/giphy.webp" alt="Boston cop slide gif">
-        
-        <h1>
-            QUESTION SET 1
-        </h1>
+function accelerate(n) {
+    myGamePiece.gravity = n;
+}
 
-        <h2>
-            Ya ready? <br>
-            To begin, select button below.
-        </h2>
+function checkScore() {
+    if (myGameArea.frameNo > 1500) {
+        document.getElementById('visitButton').style.display = 'block'; // Show the button if score > 1500
+    }
+}
 
-        <form action="https://alighass01.github.io/BM24_Set1o4_Q1.html">
-        <input type="submit" value="Begin Set 1" />
-        </form>
-      
-        <br><br>
-        
+</script>
+<br>
+<button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+<p>Use the ACCELERATE button to stay in the air</p>
+<p>How long can you stay alive?</p>
 
+<!-- Button to access a website, initially hidden -->
+<button id="visitButton" onclick="window.location.href='https://www.example.com';">Visit Website</button>
 
-    </body>
+</body>
 </html>
