@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <script>
+        function checkAnswers(){
+            // The following is what I changed.
+            Student_answer = document.querySelector('[name="username"]').value
+            Teacher_answer = "Exploring the Whites"
+
+            if (Student_answer.length === 0 || Teacher_answer.length === 0) {
+                alert("Take a guess pleaseeeeeee");
+                return false;
+            }
+
+            if (Student_answer === Teacher_answer) {
+                alert("Huh...ok sure");
+                document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io/BM24_Set2o4_Q6.html\';">Next Riddle</button>'
+                //NOTE: here is where the button should be activated and click on it to advance to an hyperlink 
+            } else {
+                alert("Erm, no :(");
+                //NOTE: here the button must be disabled
+            }
+
+        }
+        </script>
+    </head>
+    <style>
+        body {
+            font-size: 100%;
+        }
+
+        h1 {
+            font-size: 2.5em;
+        }
+
+        h2 {
+            font-size: 1.875em;
+        }
+
+        h3 {
+            font-size: 1em
+        }
+        p {
+            font-size: 0.875em;
+        }
+    </style>
+    <body style='font-family: helvetica;'>
+        
+        <form action="https://alighass01.github.io/BM24_Welcome.html">
+        <input type="submit" value="Welcome Page // Home" />
+        </form>
+
+        <h2>
+            Set 2: Question 5
+        </h2>
+
+        <h3>
+            Further south. I laughed at the name of this hiking area. <br>
+            <br>
+            Research into Anglo-Saxons. Synonym(s).
+        </h3>
+
+        <form action="" name="f1" onsubmit >
+        Your answer: <input type="username" name="username" size="20">
+        <br>
+        <font size="2">Answers are case/character sensitive</font> <br>
+        <br>
+        <input type="button" value="Check" onClick="checkAnswers()">
+        </form>
+
+        <br><br>
+        
+
+
+    </body>
+</html>
