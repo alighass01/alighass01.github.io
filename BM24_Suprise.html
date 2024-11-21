@@ -42,7 +42,7 @@ var myGameArea = {
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20);
+        this.interval = setInterval(updateGameArea, 20); // Update the game area every 20ms
     },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -82,8 +82,8 @@ function component(width, height, color, x, y, type) {
         if (this.y > rockbottom) {
             this.y = rockbottom;
             this.gravitySpeed = 0;
-            gameOver = true;
-            checkScore();
+            gameOver = true; // Mark the game as over when hitting the bottom
+            checkScore(); // Check the score to show the button if applicable
         }
     }
     this.crashWith = function(otherobj) {
@@ -104,15 +104,16 @@ function component(width, height, color, x, y, type) {
 }
 
 function updateGameArea() {
+    if (gameOver) return; // Stop the game if it's over
+
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
-            gameOver = true;
-            checkScore(); // Check the score if the player crashes
+            gameOver = true; // Mark the game as over if the player crashes
+            checkScore(); // Check the score to show the button if applicable
             return;
         } 
     }
-    if (gameOver) return;
 
     myGameArea.clear();
     myGameArea.frameNo += 1;
@@ -147,7 +148,7 @@ function accelerate(n) {
 }
 
 function checkScore() {
-    if (myGameArea.frameNo > 300) {
+    if (myGameArea.frameNo > 1500) {
         document.getElementById('visitButton').style.display = 'block'; // Show the button if score > 1500
     }
 }
