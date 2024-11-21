@@ -1,7 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+    <title></title>
+    <script>
+    function startGame() {
+      myGamePiece = new component(30, 30, "red", 10, 120);
+      myGamePiece.gravity = 0.05;
+      myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+      myGameArea.start();
+    }
+
+    var myGameArea = {
+      canvas : document.createElement("canvas"),
+      start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+      },
+      clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+    }
+
+        
+    function checkAnswers(){
+        // The following is what I changed.
+        Student_answer = document.querySelector('[name="username"]').value
+        Teacher_answer = "Spring Shabu Shabu"
+
+        if (Student_answer.length === 0 || Teacher_answer.length === 0) {
+            alert("Take a guess pleaseeeeeee");
+            return false;
+        }
+
+        if (Student_answer === Teacher_answer) {
+            alert("Swish swish bish - Katy Perry");
+            document.body.innerHTML += '<button onclick="window.location.href = \'https://alighass01.github.io/BM24_Set1o4_Q2.html\';">Next Riddle</button>'
+            //NOTE: here is where the button should be activated and click on it to advance to an hyperlink 
+        } else {
+            alert("Erm, no :(");
+            //NOTE: here the button must be disabled
+        }
+
+    }
+    </script>
     </head>
   
     <style>
@@ -25,27 +69,6 @@
         }
     </style>
     <body style='font-family: helvetica;'>
-
-        function startGame() {
-          myGamePiece = new component(30, 30, "red", 10, 120);
-          myGamePiece.gravity = 0.05;
-          myScore = new component("30px", "Consolas", "black", 280, 40, "text");
-          myGameArea.start();
-        }
-
-        var myGameArea = {
-          canvas : document.createElement("canvas"),
-          start : function() {
-            this.canvas.width = 480;
-            this.canvas.height = 270;
-            this.context = this.canvas.getContext("2d");
-            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-            this.frameNo = 0;
-          },
-          clear : function() {
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-          }
-        }
 
         <form action="https://alighass01.github.io/BM24_Welcome.html">
         <input type="submit" value="Welcome Page // Home" />
